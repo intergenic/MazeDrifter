@@ -2,7 +2,7 @@ extends Node
 
 
 
-var maze_size = 3
+var maze_size = 4
 var score = 0
 
 # Called when the node enters the scene tree for the first time.
@@ -13,3 +13,11 @@ func _ready():
 
 func increment_maze_size(n):
 	maze_size += n
+
+func reset_score():
+	score = 0
+
+func increment_score(n):
+	score += n
+
+

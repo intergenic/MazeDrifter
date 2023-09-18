@@ -11,5 +11,4 @@ script = ExtResource( 3 )
 position = Vector2( 250, 250 )
 
 [node name="Maze" parent="." instance=ExtResource( 1 )]
-map_size = 5
 erase_fraction = 0.6

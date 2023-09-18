@@ -47,8 +47,16 @@ func _physics_process(delta):
 	
 func check_collisions():
 	for i in get_slide_count():
-		#var collision = get_slide_collision(i)
-		player_death()
+		var collision = get_slide_collision(i)
+		print(collision.collider.name)
+		if collision.collider.name == "TileMap":
+			player_death()
+		if collision.collider.name == "DetailsTileMap":
+			reached_finish_line()
+		#player_death()
+
+func reached_finish_line():
+	pass
 
 func player_death():
 	collided = true #Stop movement
@@ -56,6 +64,9 @@ func player_death():
 	_animated_sprite.visible = true
 	_animated_sprite.play("explosion")
 	yield(_animated_sprite,"animation_finished")
+	reset_player()
+
+func reset_player():
 	#After explosion animation, reset and remove skid marks
 	velocity = Vector2.ZERO
 	#is_handbraking = false

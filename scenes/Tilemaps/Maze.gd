@@ -14,10 +14,11 @@ export var map_size = 5 # Size in tiles. Square mazes only
 var width = 1 # maze width in tiles
 var height = 1 # maze height in tiles
 export var erase_fraction = 0.2
-
+var is_initialized = false
 
 
 onready var Map = $TileMap
+onready var finish_line = $FinishLine
 onready var Cam = $Camera2D
 
 func _ready():
@@ -33,6 +34,7 @@ func initialize_values():
 	randomize()
 	width = GameManager.maze_size
 	height = GameManager.maze_size
+	print("Width: " + str(width) + " Height: " + str(height))
 	#tile_size = Map.cell_size
 
 func set_camera():
@@ -48,7 +50,6 @@ func check_neighbors(cell, unvisited):
 	return list
 
 func make_maze():
-	
 	var unvisited = []
 	var stack = []
 	Map.clear()
@@ -94,3 +95,22 @@ func erase_walls():
 			var n_walls = Map.get_cellv(cell + neighbor) - cell_walls[-neighbor]
 			Map.set_cellv(cell, walls)
 			Map.set_cellv(cell + neighbor, n_walls)
+
+func place_finish_line():
+	#x/y coordinates in tilemap
+	#Ensure that it is in bottom right quadrant
+	var x = (width / 2) + randi() % (width - 2)
+	var y = (height / 2) + randi() % (height - 2)
+	print("X:" + str(x) + " Y:" + str(y))
+	#Convert to pixel coordinates
+	var x_offset = (x * tile_size) - (0.5 * tile_size)
+	var y_offset = (y * tile_size) - (0.5 * tile_size)
+	print("X_off:" + str(x_offset) + " Y_off:" + str(y_offset))
+	finish_line.position = Vector2(x_offset, y_offset)
+	
+
+
+func _on_FinishLine_area_entered(area):
+	print("Finish reached (maze node)")
+	GameManager.increment_maze_size(1)
+	get_tree().reload_current_scene()
