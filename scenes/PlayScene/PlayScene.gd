@@ -1,29 +1,30 @@
 extends Node2D
 
 
-var maze
-var player_vehicle
+
 
 var initialized_map = false
-
+onready var _maze = $Maze
+onready var _vehicle = $Vehicle
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	print("Playing play scene")
-	maze = get_node("Maze")
-	player_vehicle = get_node("Vehicle")
 
 	
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if !initialized_map:
+	if !_maze.is_initialized:
 		update_map()
 
+	
+
 func update_map():
-	maze.initialize_values()
-	maze.set_camera()
-	maze.make_maze()
-	maze.erase_walls()
-	initialized_map = true
+	_maze.initialize_values()
+	_maze.set_camera()
+	_maze.make_maze()
+	_maze.erase_walls()
+	_maze.place_finish_line()
+	_maze.is_initialized = true

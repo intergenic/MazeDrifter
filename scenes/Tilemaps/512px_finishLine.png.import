@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/TopDownRacingTilemap.png-5fddb5ea5140b5e75902dd8ed954f6e4.stex"
+path="res://.import/512px_finishLine.png-3e059b784eced79eae106f3e4159ad08.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/Tilemaps/TopDownRacingTilemap.png"
-dest_files=[ "res://.import/TopDownRacingTilemap.png-5fddb5ea5140b5e75902dd8ed954f6e4.stex" ]
+source_file="res://scenes/Tilemaps/512px_finishLine.png"
+dest_files=[ "res://.import/512px_finishLine.png-3e059b784eced79eae106f3e4159ad08.stex" ]
 
 [params]
 
