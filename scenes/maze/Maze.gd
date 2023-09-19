@@ -19,7 +19,7 @@ var is_initialized = false
 
 onready var Map = $TileMap
 onready var finish_line = $FinishLine
-onready var Cam = $Camera2D
+onready var camera = $Camera2D
 
 func _ready():
 	#randomize()
@@ -38,8 +38,8 @@ func initialize_values():
 	#tile_size = Map.cell_size
 
 func set_camera():
-	Cam.translate(Vector2((tile_size * 0.5 * width), (tile_size * 0.5 * height)))
-	Cam.zoom = Vector2(width,height)
+	camera.translate(Vector2((tile_size * 0.5 * width), (tile_size * 0.5 * height)))
+	camera.zoom = Vector2(width,height)
 
 func check_neighbors(cell, unvisited):
 	# returns an array of cell's unvisited neighbors
@@ -85,6 +85,7 @@ func make_maze():
 		#yield(get_tree(), 'idle_frame')
 
 func erase_walls():
+# warning-ignore:unused_variable
 	for i in range(int(width * height * erase_fraction)):
 		var x = int(rand_range(1, width - 1))
 		var y = int(rand_range(1, height - 1))
@@ -101,6 +102,10 @@ func place_finish_line():
 	#Ensure that it is in bottom right quadrant
 	var x = (width / 2) + randi() % (width - 2)
 	var y = (height / 2) + randi() % (height - 2)
+	if x >= width:
+		x -= 1
+	if y >= height:
+		y -= 1
 	print("X:" + str(x) + " Y:" + str(y))
 	#Convert to pixel coordinates
 	var x_offset = (x * tile_size) - (0.5 * tile_size)
@@ -110,7 +115,9 @@ func place_finish_line():
 	
 
 
+# warning-ignore:unused_argument
 func _on_FinishLine_area_entered(area):
 	print("Finish reached (maze node)")
 	GameManager.increment_maze_size(1)
+# warning-ignore:return_value_discarded
 	get_tree().reload_current_scene()

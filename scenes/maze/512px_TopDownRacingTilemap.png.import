@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/512px_TopDownRacingTilemap.png-e735faf2e390f9347124f6b704a572bc.stex"
+path="res://.import/512px_TopDownRacingTilemap.png-e0b521f7ca83f6a6f9ec2549b4815fad.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/Tilemaps/512px_TopDownRacingTilemap.png"
-dest_files=[ "res://.import/512px_TopDownRacingTilemap.png-e735faf2e390f9347124f6b704a572bc.stex" ]
+source_file="res://scenes/maze/512px_TopDownRacingTilemap.png"
+dest_files=[ "res://.import/512px_TopDownRacingTilemap.png-e0b521f7ca83f6a6f9ec2549b4815fad.stex" ]
 
 [params]
 

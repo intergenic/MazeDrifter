@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/512px_finishLine.png-3e059b784eced79eae106f3e4159ad08.stex"
+path="res://.import/512px_finishLine.png-e48f8f89e8eb99d1e930c55e5eb47f67.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/Tilemaps/512px_finishLine.png"
-dest_files=[ "res://.import/512px_finishLine.png-3e059b784eced79eae106f3e4159ad08.stex" ]
+source_file="res://scenes/maze/512px_finishLine.png"
+dest_files=[ "res://.import/512px_finishLine.png-e48f8f89e8eb99d1e930c55e5eb47f67.stex" ]
 
 [params]
 

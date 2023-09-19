@@ -19,12 +19,15 @@ var is_handbraking = false
 var start_location
 var start_rotation
 var collided = false
+var is_active = false
+var is_alive = true
 onready var _animated_sprite = $AnimatedSprite
 onready var _sprite = $Sprite
 onready var _fl_trail = $TrailPositionFrontLeft/TrailLine
 onready var _rl_trail = $TrailPositionRearLeft/TrailLine
 onready var _fr_trail = $TrailPositionFrontRight/TrailLine
 onready var _rr_trail = $TrailPositionRearRight/TrailLine
+onready var camera = $Camera2D
 
 
 func _ready():
@@ -34,7 +37,7 @@ func _ready():
 	_animated_sprite.visible = false
 
 func _physics_process(delta):
-	if !collided:
+	if !collided && is_active:
 		get_input()
 		apply_friction()
 		calculate_steering(delta)
@@ -64,6 +67,7 @@ func player_death():
 	_animated_sprite.visible = true
 	_animated_sprite.play("explosion")
 	yield(_animated_sprite,"animation_finished")
+	is_alive = false
 	reset_player()
 
 func reset_player():

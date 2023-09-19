@@ -110,3 +110,6 @@ animation = "idle"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2( -2, 0.5 )
 shape = SubResource( 13 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2( 1.5, 1.5 )

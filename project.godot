@@ -332,9 +332,10 @@ config/icon="res://icon.png"
 
 [autoload]
 
-GameManager="*res://managers/game_manager/GameManager.tscn"
+GameManager="*res://autoload/game_manager/GameManager.tscn"
 sp="*res://addons/awesome_splash/utils_splash.gd"
 gd="*res://addons/godot-action/utils_gd_action.tscn"
+CameraTransition="*res://autoload/camera_transition/CameraTransition.tscn"
 
 [editor_plugins]
 
