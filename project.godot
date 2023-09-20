@@ -336,6 +336,13 @@ GameManager="*res://autoload/game_manager/GameManager.tscn"
 sp="*res://addons/awesome_splash/utils_splash.gd"
 gd="*res://addons/godot-action/utils_gd_action.tscn"
 CameraTransition="*res://autoload/camera_transition/CameraTransition.tscn"
+Utilites="*res://autoload/utilities/utilites.tscn"
+Gui="*res://autoload/GUI/GUI.tscn"
+
+[display]
+
+window/size/width=1280
+window/size/height=720
 
 [editor_plugins]
 

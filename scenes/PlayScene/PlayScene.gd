@@ -6,6 +6,7 @@ export var camera_transition_delay = 0.1
 var initialized_map = false
 var transitioned_camera = false
 var is_resetting = false
+
 onready var _maze = $Maze
 onready var _vehicle = $Vehicle
 onready var _shadow_sprite = $ShadowSprite
@@ -21,6 +22,8 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	if _vehicle.is_active:
+		update_score_timer(delta)
 	if !_maze.is_initialized:
 		print("Creating map")
 		update_map() 
@@ -32,7 +35,11 @@ func _process(delta):
 		is_resetting = true
 		place_shadow()
 		update_camera()
-		
+
+func update_score_timer(delta):
+	GameManager.increment_score_timer(delta)
+	Gui._timer_label.text = Utilites.seconds2mmss(GameManager.score_timer)
+
 func place_shadow():
 	_shadow_sprite.visible = true
 	_shadow_sprite.position = _vehicle.death_location
