@@ -18,7 +18,8 @@ var steer_angle
 var is_handbraking = false
 var start_location
 var start_rotation
-var collided = false
+var death_location
+var death_rotation
 var is_active = false
 var is_alive = true
 onready var _animated_sprite = $AnimatedSprite
@@ -33,11 +34,13 @@ onready var camera = $Camera2D
 func _ready():
 	start_location = self.position
 	start_rotation = self.rotation
+	death_location = start_location
+	death_rotation = start_rotation
 	_sprite.visible = true
 	_animated_sprite.visible = false
 
 func _physics_process(delta):
-	if !collided && is_active:
+	if is_active:
 		get_input()
 		apply_friction()
 		calculate_steering(delta)
@@ -54,21 +57,27 @@ func check_collisions():
 		print(collision.collider.name)
 		if collision.collider.name == "TileMap":
 			player_death()
-		if collision.collider.name == "DetailsTileMap":
-			reached_finish_line()
-		#player_death()
+		#if collision.collider.name == "DetailsTileMap":
+		#	reached_finish_line()
 
 func reached_finish_line():
 	pass
 
 func player_death():
-	collided = true #Stop movement
+	print("Player is dead")
+	print(is_active)
+	is_active = false
 	_sprite.visible = false
 	_animated_sprite.visible = true
 	_animated_sprite.play("explosion")
+	death_location = self.position
+	death_rotation = self.rotation + (PI / 2)
+	print("Death rotation:")
+	print(death_rotation)
 	yield(_animated_sprite,"animation_finished")
 	is_alive = false
 	reset_player()
+
 
 func reset_player():
 	#After explosion animation, reset and remove skid marks
@@ -83,7 +92,6 @@ func reset_player():
 	_sprite.visible = true
 	_animated_sprite.play("idle")
 	_animated_sprite.visible = false
-	collided = false
 
 func reset_skidmarks(trail):
 	trail.clear_points()
@@ -106,6 +114,9 @@ func get_input():
 		acceleration = transform.x * engine_power
 	if Input.is_action_pressed("reverse"):
 		acceleration = transform.x * braking
+#	if !is_active:
+#		turn = 0
+#		acceleration = 0
 	
 
 func apply_friction():
@@ -118,7 +129,6 @@ func apply_friction():
 	acceleration += drag_force + friction_force
 
 func calculate_steering(delta):
-	
 	var rear_wheel = position - transform.x * wheel_base / 2.0
 	var front_wheel = position + transform.x * wheel_base / 2.0
 	rear_wheel += velocity * delta

@@ -3,7 +3,7 @@ extends Line2D
 export var length = 50
 export var fadeTime = 1
 var point
-var timer
+var timer = 0
 
 func _ready():
 	set_as_toplevel(true)
